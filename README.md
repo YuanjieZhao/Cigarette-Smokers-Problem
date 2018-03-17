@@ -1,15 +1,14 @@
-# Cigarette-Smokers-Problem
-A solution to Cigarette Smokers Problem with clear explanation
+# Cigarette-Smokers-Problem: Classic Concurrency Problem with Better Explanation
 
-Cigarette smokers problem – classic concurrency problem
+This post presents a more intuitive solution to Cigarette Smokers Problem
 
-**Motivation of this post**
+## Motivation of this post
 
 The cigarette smokers problem was originally proposed by Suhas Patil, who claimed that one cannot solve it with semaphores. It resembles a producer-consumer problem but has extra constraints that make this problem very interesting. There are many ways to tackle this problem, but very few posts online clearly explain how they came up with their solutions. Here I present a natural strategy I have come up with and clear explanations of my thought process, in the hope that other readers would find it useful.
 
 The detailed implementation of solution is in smoke.c file.
 
-**Problem description** (from Wikipedia)
+## Problem description (from Wikipedia)
 
 Assume a cigarette requires three ingredients to make and smoke: tobacco, paper, and matches. There are three smokers around a table, each of whom has an infinite supply of _one_ of the three ingredients — one smoker has an infinite supply of tobacco, another has paper, and the third has matches.
 
@@ -24,7 +23,7 @@ To model a resource-management problem of operating systems in real situations, 
 3. The agent is not permitted to know anything about the resource needs of smokers; i.e., the agent cannot wakeup a smoker directly.
 4. Each time the agent makes two resources available, it must wait on a condition variable for a smoker to smoke before it can make any additional resources available.
 
-**Problem analysis**
+## Problem analysis
 
 **Trick of the problem**
 
@@ -40,7 +39,7 @@ However, the condition\_wait operation of a monitor can only be used for a singl
 
 There are different approaches to implement the strategy mentioned above. My solution implements the intermediate mechanism as three listeners sharing a global variable called sum. Each listener is only responsible for a certain type of event (paper/match/tobacco). I use the sum to record the events that listeners have received so far. Each combination of two events adds up to a unique value. Once the sum reaches one of the characteristic values, listeners will trigger a new event and signal the smokers, which will wake up the correct smoker.
 
-**Additional notes of C implementation files**
+## Additional notes of C implementation files
 
 1. To test the output, I record the number of times that the agent signals resources and the number of times that a smoker smokes.
 2. Instead of using printf for debugging, I defined a macro called VERBOSE\_PRINT, so I can turn diagnostic printf&#39;s on or off when I compile the program.
