@@ -1,7 +1,3 @@
-//
-// Written by Mike Feeley, University of BC, 2010-2014
-// Do not redistribute any portion of this code without permission.
-//
 
 #ifndef __uthread_util_h__
 #define __uthread_util_h__

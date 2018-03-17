@@ -1,7 +1,3 @@
-//
-// Written by Mike Feeley, University of BC, 2010-2014
-// Do not redistribute any portion of this code without permission.
-//
 
 #if __CYGWIN__
 #ifndef NATIVE_STACK_SIZE
